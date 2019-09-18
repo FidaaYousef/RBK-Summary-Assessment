@@ -58,8 +58,14 @@ function reduce(array, f, acc) {
 //solve it using the most appropriate helper functions(reduce,each,map,filter).
 //wordLengths("hello its me") // [5,3,2]
 
+
+// create an array to hold the string after split it and using the map to itterate over the array and determine the length for each element and push it to new Array
 function wordLengths(str) {
-    // TODO: your code here 
+   var newArr= str.split(" ");
+  return map(newArr,function(element,i){
+              return (element.length);
+   })
+ 
 }
 
 //=============================================================================
@@ -71,9 +77,30 @@ function wordLengths(str) {
 // countOccurrences("hello", "l"); // 2
 // countOccurrences("hello, world!", "l"); // 3
 
+// create an array to hold the string after split it and using each to itterate and check if the condition true increment the count
+
 function countOccurrences(string, character) {
-    // your code is here
+    var newArr= string.split('');
+    var count=0;
+   each(newArr,function(element,i){
+    if(element===character){
+      ++count;
+    }
+   })
+   return count;
+  
 }
+
+// function countOccurrences(string, character) {
+//   var newArr= string.split('');
+//     return reduce(newArr,function(element,i){
+//           return filter(newArr,function(element,i){
+//                       return (element===character);
+//                     })
+//         },0)
+// }
+
+
 
 //=============================================================================
 /*                                  Q3                                    */
@@ -84,7 +111,10 @@ function countOccurrences(string, character) {
 // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
 
 function wordsLongerThanThree(str) {
-    // TODO: your code here 
+   var newArr= str.split(' ');
+   return filter(newArr,function(element,i){
+    return element.length >3;
+   })
 }
 
 //=============================================================================
@@ -99,7 +129,10 @@ function wordsLongerThanThree(str) {
 //repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
 
 function repeatString(str, count) { 
- // TODO: your code here 
+ if(count===0){
+  return ' ';
+ }
+ return str + repeatString(str,--count)
 } 
  
 
@@ -112,6 +145,7 @@ function repeatString(str, count) {
  size a property represented by a string. ex "M","L".
  numberOfSlice a property that hold the number of slice, ex: 8
  ** the values of all properties will be provided as arguments in the function invocation. 
+
  addIngredients a function that add a new ingredient to the ingredients property.
  displayIngredients a function that displays a comma separated string of all ingredients. ex: The ingredients are:tomato,mushroom,meat
  bakePizza a function that display a string with your pizza description after 2 seconds. ex "Your thin M 8 slice pizza is done" 
@@ -130,6 +164,44 @@ function repeatString(str, count) {
 
 // Write your code here .....
 
+function makePizza(crust,size,numberOfSlice){
+
+      var crust = crust;
+      var size =size ;
+      var numberOfslice=numberOfslice;
+      var ingredients=ingredients;
+     
+return {
+
+    var addIngredients :function(ingredient){
+
+          return  ingredients + " " + ingredient;
+
+    }
+     var displayIngredients :function(){
+
+          return "The ingredients are:" ingredients
+
+      }
+        // var bakePizza : function bakePizza(){
+        //       var time= setInterval(,2000)
+
+        // }
+
+      var eatSlice :function(){
+
+        if(numberOfSlice>0){
+            numberOfSlice=--numberOfSlice;
+          return "you can eat more";
+        }
+
+      }
+    }
+}
+
+
+
+
 //=============================================================================
 /*                                  Q6                                      */
 //=============================================================================
@@ -145,6 +217,7 @@ Your class should has:
 a- Accept the book name as parameter
 b- Add the new book to "toRead" array
 c- Increment the number of the unread books.
+
 "finishCurrentBook" function that:
 a- Add the "currentRead" to the "readBooks" array
 b- Increment the "read" books
@@ -154,7 +227,46 @@ d- Decrement the number of "unread" books
 
 // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
 
+/// Hello,,, Yes Iam.
+
 // Write your code here .....
+
+function ReadingList(read,unRead,toRead,currentRead,readBooks){
+   var library={}
+   library.read= read;
+   library.unRead =unRead;
+   library.toRead= toRead;
+   library.currentRead =currentRead;
+   library.readBooks =readBooks;
+   library.AddBook=AddBook;
+   library.finishCurrentBook=finishCurrentBook;
+   return library;
+
+  
+}
+
+
+var AddBook=function(book){
+  this.toRead.push(book);
+            this.read=++this.read;
+
+}
+
+
+var finishCurrentBook  = function finishCurrentBook(){
+        this.toRead.push(this.currentRead);
+        this.read=++this.read;
+        this.toRead.unshift(this.currentRead);
+        this.unread= -- this.unread;
+
+}
+
+
+
+
+
+
+
 
 //=============================================================================
 /*                                  Q7                                       */
@@ -175,6 +287,33 @@ d- Decrement the number of "unread" books
 //  safe('money','small') => "watch gold-bar money"
 
 // Write your code here .....
+
+
+function makeSafe(initial){
+  var sizelimit= initial;
+
+      function addItem (item,itemSize){
+
+          if (sizelimit !==0){
+              if(itemSize==='small'){
+                 sizelimit= sizelimit -1;
+              }
+                  if(itemSize==='medium'){
+                     sizelimit= sizelimit -2;
+                    }
+                  if(itemSize==='big'){
+                      sizelimit= sizelimit -3;
+                    }
+              return sizeLimit;
+
+          }else{
+                if(sizelimit===0){
+                    return "Can't fit";
+              }
+          
+            }
+
+   }
 
 //=============================================================================
 /*                                  Q8                                       */
@@ -204,7 +343,7 @@ d- Decrement the number of "unread" books
 //Using jQuery run a function that gets called using the button's id (#create)
 //The function takes see if the checkboxes are checked or not (true or false), use $("#id").prop('checked')
 //If all 3 checkboxes are checked add an list item with the word black in it and add the "black" class to it
-//If 2 of the checkboxes are checked add (purple = blue + red), (green = blue + yellow), (orange = red + orange)
+//If 2 of the checkboxes are checked add (purple = blue + red), (green = blue + yellow), (orange = red + yellow)
 //If 1 of the checkboxes is checked add (yellow, blue or red) as li and the class to it
 
 //Using jQuery call a function from the button's id (#delete)
@@ -217,11 +356,22 @@ d- Decrement the number of "unread" books
 // Theoretical questions.
 // 1- In your own words,Why do we use Closures ?
 
+//for more securty in order to make the global variable not affected and can not be access by any users.
+
 // 2- In OOP, what does "this" refer to ?
 
+
+//it refer to the object that hold the values and the functions as their values.
+
 // 3- What is jQuery?
+/*it is a library created by developer contains functionality related to (events,methods,styling,..)
+this library make minimize our code.*/
 
 // 4- what is the diffrence between Closure's methods and The OOP's methods?
+
+/* for both methods which used to git security to our code ,
+but oop's use less memory space because we can invoke the only function we need in the oppsite of clouser
+which take more space in library*/
 
 
 
